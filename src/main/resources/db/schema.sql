@@ -5,3 +5,12 @@ CREATE TABLE IF NOT EXISTS products (
     category VARCHAR(255),
     price DECIMAL(10,2) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS orders(
+    id SERIAL PRIMARY KEY NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    order_date DATE NOT NULL,
+    shipping_method VARCHAR(50) NOT NULL,
+    order_status VARCHAR(20) NOT NULL,
+    product_ids BIGINT [] NOT NULL
+);

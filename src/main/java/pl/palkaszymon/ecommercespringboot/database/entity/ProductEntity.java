@@ -1,4 +1,4 @@
-package pl.palkaszymon.ecommercespringboot.database;
+package pl.palkaszymon.ecommercespringboot.database.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
