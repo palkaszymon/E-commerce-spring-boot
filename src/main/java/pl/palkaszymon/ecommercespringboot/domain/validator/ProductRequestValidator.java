@@ -6,10 +6,9 @@ import pl.palkaszymon.ecommercespringboot.domain.request.NewProductRequest;
 import pl.palkaszymon.ecommercespringboot.domain.request.UpdateProductRequest;
 
 @Component
-public class RequestValidator {
+public class ProductRequestValidator {
     public void validateNewProductRequest(NewProductRequest request) {
         checkNotNullOrEmpty(request.name(), "Name cannot be null or empty!");
-        checkNotNullOrEmpty(request.description(), "Description cannot be null or empty!");
         checkNotNullOrEmpty(request.category(), "Category cannot be null or empty!");
         checkNotNull(request.price(), "Price cannot be null!");
     }
@@ -17,9 +16,6 @@ public class RequestValidator {
     public void validateUpdateProductRequest(UpdateProductRequest request) {
         if (request.name() != null) {
             checkNotNullOrEmpty(request.name(), "Name cannot be empty!");
-        }
-        if (request.description() != null) {
-            checkNotNullOrEmpty(request.description(), "Description cannot be empty!");
         }
         if (request.category() != null) {
             checkNotNullOrEmpty(request.category(), "Category cannot be empty!");

@@ -21,6 +21,7 @@ public class OrderEntity {
     @Id
     private Long id;
     private String email;
+    private String address;
     private LocalDateTime orderDate;
     private ShippingMethod shippingMethod;
     private OrderStatus orderStatus;

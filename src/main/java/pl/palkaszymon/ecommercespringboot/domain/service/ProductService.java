@@ -9,7 +9,7 @@ import pl.palkaszymon.ecommercespringboot.domain.exception.ProductNotFoundExcept
 import pl.palkaszymon.ecommercespringboot.domain.model.Category;
 import pl.palkaszymon.ecommercespringboot.domain.request.NewProductRequest;
 import pl.palkaszymon.ecommercespringboot.domain.request.UpdateProductRequest;
-import pl.palkaszymon.ecommercespringboot.domain.validator.RequestValidator;
+import pl.palkaszymon.ecommercespringboot.domain.validator.ProductRequestValidator;
 
 import java.util.List;
 
@@ -18,18 +18,18 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final RequestValidator requestValidator;
+    private final ProductRequestValidator productRequestValidator;
 
     public ProductEntity createProduct(NewProductRequest request) {
-        requestValidator.validateNewProductRequest(request);
+        productRequestValidator.validateNewProductRequest(request);
         ProductEntity productToSave = new ProductEntity(null, request.name(), request.description(), Category.fromString(request.category()), request.price());
         return productRepository.save(productToSave);
     }
 
     public ProductEntity updateProduct(Long productId, UpdateProductRequest request) {
-        requestValidator.validateUpdateProductRequest(request);
-        ProductEntity productToUpdate = this.getProductById(productId);
-        return productRepository.save(this.prepareEntityToUpdate(productToUpdate, request));
+        productRequestValidator.validateUpdateProductRequest(request);
+        ProductEntity productToUpdate = getProductById(productId);
+        return productRepository.save(prepareEntityToUpdate(productToUpdate, request));
     }
 
     public ProductEntity getProductById(Long productId) {

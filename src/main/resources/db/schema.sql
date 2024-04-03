@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS orders(
     id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
     order_date DATE NOT NULL,
     shipping_method VARCHAR(50) NOT NULL,
     order_status VARCHAR(20) NOT NULL,
