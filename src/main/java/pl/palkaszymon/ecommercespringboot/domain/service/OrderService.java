@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.palkaszymon.ecommercespringboot.database.entity.OrderEntity;
 import pl.palkaszymon.ecommercespringboot.database.repository.OrderRepository;
 import pl.palkaszymon.ecommercespringboot.database.repository.ProductRepository;
+import pl.palkaszymon.ecommercespringboot.domain.exception.OrderNotFoundException;
 import pl.palkaszymon.ecommercespringboot.domain.exception.ProductNotFoundException;
 import pl.palkaszymon.ecommercespringboot.domain.model.OrderStatus;
 import pl.palkaszymon.ecommercespringboot.domain.model.ShippingMethod;
@@ -35,6 +36,13 @@ public class OrderService {
         OrderEntity savedOrder = orderRepository.save(orderToSave);
         sendOrderNotifications(savedOrder);
         return savedOrder;
+    }
+
+    public void updateOrderStatus(Long orderId) {
+        OrderEntity orderToUpdate = orderRepository.findById(orderId).orElseThrow(() ->
+                new OrderNotFoundException(String.format("Order with id: %s doesn't exist!", orderId)));
+        orderToUpdate.setOrderStatus(OrderStatus.CONFIRMED);
+        orderRepository.save(orderToUpdate);
     }
 
     private void checkRequestProductsExistence(Set<Long> productIds) {
