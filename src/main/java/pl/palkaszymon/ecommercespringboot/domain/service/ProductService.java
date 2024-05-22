@@ -56,4 +56,8 @@ public class ProductService {
         }
         return foundEntity;
     }
+
+    public void deleteAllProducts() {
+        productRepository.deleteAll();
+    }
 }
